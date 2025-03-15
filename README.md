@@ -1,1 +1,1 @@
-# carbon_footprint_tracker
+# Carbon Footprint Tracker
