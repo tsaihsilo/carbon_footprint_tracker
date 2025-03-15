@@ -1,15 +1,17 @@
+import '../App.css'
 
-function PieChart() {
+interface Activity {
+  name: string;
+  category: string;
+  carbon: number;
+}
+
+function PieChart({ activities }: { activities: Activity[]}) {
+  // function 
   return (
     <div className="pie-chart">
       <h2>PieChart</h2>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+
     </div>
   );
 }
