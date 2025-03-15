@@ -7,12 +7,12 @@ interface Activity {
   carbon: number
 }
 
-interface messageProp {
+interface percentageProp {
   carbonSoFar: number;
   goal: number
 }
 
-interface percentageProp {
+interface messageProp {
   carbonSoFar: number;
   goal: number
 }
