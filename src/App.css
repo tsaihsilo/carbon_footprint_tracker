@@ -1,0 +1,199 @@
+h2 {
+  text-align: left;
+  /* ✅ Aligns all h2 titles to the left */
+  width: 100%;
+  /* ✅ Ensures full width so text-align works */
+  margin-left: 0;
+  /* ✅ Removes extra indentation */
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+
+.add-activity-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Ensures items don’t overflow */
+  align-items: center;
+  justify-content: flex-start;
+  /* Keeps elements aligned in a row */
+  gap: 10px;
+  width: 100%;
+}
+
+.add-activity-container input,
+.add-activity-container select,
+.goal-container input {
+  min-width: 150px;
+  height: 40px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 2px solid #000000aa;
+  background: transparent;
+  color: #000000aa;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  /* Set fixed width */
+  height: 35px;
+  /* Set same height */
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #000000aa;
+  /* Consistent border */
+  background: #f5f5f5;
+  /* Light background */
+  color: #000000aa;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+  background: #e0e0e0;
+}
+
+.button:active {
+  background: #ccc;
+}
+
+.activity-element {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* ✅ Even spacing */
+  gap: 15px;
+  font-size: 18px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 600px;
+  /* ✅ Prevents stretching */
+}
+
+/* Style for delete button */
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  font-size: 22px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  /* Centers horizontally */
+  align-items: center;
+  /* Centers vertically */
+  width: 100vw;
+  /* Full width */
+  height: 80px;
+  /* Set a fixed height */
+  position: fixed;
+  /* Stays fixed at the top */
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 23px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Optional background */
+  z-index: 1000;
+  /* Ensures it's above other elements */
+}
+
+/* Push the grid below the title */
+.container {
+  margin-top: 100px;
+  /* Adds space below the title */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  /* Makes grid fill remaining space */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.dashboard {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.activity-log {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* ✅ Aligns to the left */
+  width: 100%;
+}
+
+.pie-chart {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.goal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 400px;
+  max-width: 600px;
+}
+
+.goal-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  flex-wrap: nowrap;
+}
+
+.goal-container input {
+  width: 80px;
+  min-width: 60px;
+  height: 35px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.goal-container button {
+  width: 70px;
+  min-width: 70px;
+  height: 35px;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.goal-container span {
+  white-space: nowrap;
+}
