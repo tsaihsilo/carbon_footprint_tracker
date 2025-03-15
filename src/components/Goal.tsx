@@ -17,35 +17,6 @@ interface percentageProp {
   goal: number
 }
 
-function Message({ carbonSoFar, goal }: messageProp) {
-  if (goal === 0) {
-    return <p>Set a goal to start tracking your carbon footprint reduction!</p>
-  }
-  else if (carbonSoFar === 0) {
-    return <p>Fantastic! You haven’t produced any carbon emissions yet today!</p>
-  }
-  else if (carbonSoFar < goal) {
-    return <p>Great job! You're staying under your goal. Keep it up!</p>
-  }
-  else {
-    return <p>You exceeded your goal. Consider small changes to improve!</p>
-  }
-}
-
-function Percentage( { carbonSoFar, goal }: percentageProp) {
-  let percentage = 0
-  if (goal === 0) {
-    percentage = 0
-  }
-  else if (carbonSoFar >= goal) {
-    percentage = 100
-  }
-  else {
-    percentage = Math.round((carbonSoFar/goal) * 100)
-  }
-  return <span>{percentage}%</span>
-}
-
 function Goal({ activities }: {activities: Activity[]}) {
   const carbonSoFar = activities.reduce((acc, curr) => acc + curr.carbon, 0)
 
@@ -63,8 +34,36 @@ function Goal({ activities }: {activities: Activity[]}) {
   useEffect(() => {
     window.localStorage.setItem("goal", JSON.stringify(goal))
   }, [goal])
-  
 
+  function Percentage( { carbonSoFar, goal }: percentageProp) {
+    let percentage = 0
+    if (goal === 0) {
+      percentage = 0
+    }
+    else if (carbonSoFar >= goal) {
+      percentage = 100
+    }
+    else {
+      percentage = Math.round((carbonSoFar/goal) * 100)
+    }
+    return <span>{percentage}%</span>
+  }
+
+  function Message({ carbonSoFar, goal }: messageProp) {
+    if (goal === 0) {
+      return <p>Set a goal to start tracking your carbon footprint reduction!</p>
+    }
+    else if (carbonSoFar === 0) {
+      return <p>Fantastic! You haven’t produced any carbon emissions yet today!</p>
+    }
+    else if (carbonSoFar < goal) {
+      return <p>Great job! You're staying under your goal. Keep it up!</p>
+    }
+    else {
+      return <p>You exceeded your goal. Consider small changes to improve!</p>
+    }
+  }
+  
   return (
     <div className="goal">
 
