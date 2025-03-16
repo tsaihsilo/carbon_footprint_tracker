@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import ActivityLog from './components/ActivityLog.tsx';
 import Dashboard from './components/Dashboard.tsx';
 import Goal from './components/Goal.tsx';
-import PieChart from './components/PieChart.tsx';
+import PieChartFeature from './components/PieChartFeature.tsx';
 
 function App() {
 
@@ -32,7 +32,7 @@ function App() {
       <div className='container'>
         <Dashboard/>
         <ActivityLog activities={activities} setActivities={setActivities}/>
-        <PieChart/>
+        <PieChartFeature activities={activities}/>
         <Goal activities={activities}/>
       </div>
     </div>

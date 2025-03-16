@@ -35,7 +35,7 @@ function Goal({ activities }: {activities: Activity[]}) {
     window.localStorage.setItem("goal", JSON.stringify(goal))
   }, [goal])
 
-  function Percentage( { carbonSoFar, goal }: percentageProp) {
+  function Percentage({ carbonSoFar, goal }: percentageProp) {
     let percentage = 0
     if (goal === 0) {
       percentage = 0
@@ -91,14 +91,12 @@ function Goal({ activities }: {activities: Activity[]}) {
       </div>
       <br></br>
       <br></br>
-      <br></br>
 
       <div className="progress-bar">
         {goal > 0 && <progress value={carbonSoFar} max={goal} />}
         &nbsp;&nbsp;&nbsp;
         <Percentage carbonSoFar={carbonSoFar} goal={goal}/>
       </div>
-      <br></br>
       <br></br>
 
       <Message carbonSoFar={carbonSoFar} goal={goal}/>
