@@ -1,11 +1,10 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
 
-interface DashboardProp {
+type DashboardProp = {
   allCarbonData: { date: string, totalCarbon: number }[]
 }
 
 function Dashboard({ allCarbonData }: DashboardProp) {
-
   return (
     <div className="dashboard">
       <h2>Dashboard</h2>
