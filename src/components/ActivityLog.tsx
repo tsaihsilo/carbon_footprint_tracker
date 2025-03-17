@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import '../App.css'
 
-interface Activity {
+type Activity = {
   name: string; 
   category: string; 
   carbon: number
 }
 
-interface ActivityLogProp {
-  activities: Activity[], 
-  addActivity: (newActivity: Activity)  => void, 
+type ActivityLogProp = {
+  activities: Activity[]; 
+  addActivity: (newActivity: Activity)  => void; 
   deleteActivity: (index: number)=> void
 }
 

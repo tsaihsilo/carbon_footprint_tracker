@@ -7,17 +7,17 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css'
 
-interface Activity {
+type Activity = {
   name: string; 
   category: string; 
   carbon: number
 }
 
-interface ActivitiesDictionary {
+type ActivitiesDictionary = {
   [date: string]: Activity[]
 }
 
-interface GoalsDictionary {
+type GoalsDictionary = {
   [date: string]: number
 }
 

@@ -1,6 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
 
-interface DashboardProp {
+type DashboardProp = {
   allCarbonData: { date: string, totalCarbon: number }[]
 }
 

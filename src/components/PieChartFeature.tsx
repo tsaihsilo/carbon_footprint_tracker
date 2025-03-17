@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 
 import '../App.css'
 
-interface Activity {
+type Activity = {
   name: string;
   category: string;
   carbon: number;

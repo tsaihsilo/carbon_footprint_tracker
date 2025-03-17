@@ -1,18 +1,18 @@
 import { SetStateAction } from 'react'
 import '../App.css'
 
-interface GoalProp {
+type GoalProp = {
   totalCarbon: number, 
   goal: number, 
   setGoal: (newGoal: number)  => void
 }
 
-interface PercentageProp {
+type PercentageProp = {
   carbonSoFar: number;
   goal: number
 }
 
-interface MessageProp {
+type MessageProp = {
   carbonSoFar: number;
   goal: number
 }
