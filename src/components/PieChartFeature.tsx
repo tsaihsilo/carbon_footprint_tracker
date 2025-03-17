@@ -13,8 +13,7 @@ interface messageProp {
   totalCarbon: number
 }
 
-function PieChartFeature({ activities }: { activities: Activity[] }) {
-  const totalCarbon = activities.reduce((acc, curr) => acc + curr.carbon, 0)
+function PieChartFeature({ activities, totalCarbon }: { activities: Activity[], totalCarbon: number }) {
 
   function Message({ totalCarbon }: messageProp) {
     if (totalCarbon === 0) {

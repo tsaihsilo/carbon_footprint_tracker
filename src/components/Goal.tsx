@@ -1,11 +1,5 @@
-import { SetStateAction, useEffect, useState } from 'react'
+import { SetStateAction } from 'react'
 import '../App.css'
-
-interface Activity {
-  name: string; 
-  category: string; 
-  carbon: number
-}
 
 interface percentageProp {
   carbonSoFar: number;
@@ -17,23 +11,15 @@ interface messageProp {
   goal: number
 }
 
-function Goal({ activities }: {activities: Activity[]}) {
-  const carbonSoFar = activities.reduce((acc, curr) => acc + curr.carbon, 0)
-
-  const [goal, setGoal] = useState(() => Number(window.localStorage.getItem("goal") || "0"))
-
+function Goal({ totalCarbon, goal, setGoal }: { totalCarbon: number, goal: number, setGoal: (newGoal: number)  => void}) {
+  
   function handleInputChange(event: { target: { value: SetStateAction<string>; }; }) {
     setGoal(Number(event.target.value))
   }
 
   function deleteGoal() {
     setGoal(0)
-    window.localStorage.removeItem("goal")
   }
-
-  useEffect(() => {
-    window.localStorage.setItem("goal", JSON.stringify(goal))
-  }, [goal])
 
   function Percentage({ carbonSoFar, goal }: percentageProp) {
     let percentage = 0
@@ -93,13 +79,13 @@ function Goal({ activities }: {activities: Activity[]}) {
       <br></br>
 
       <div className="progress-bar">
-        {goal > 0 && <progress value={carbonSoFar} max={goal} />}
+        {goal > 0 && <progress value={totalCarbon} max={goal} />}
         &nbsp;&nbsp;&nbsp;
-        <Percentage carbonSoFar={carbonSoFar} goal={goal}/>
+        <Percentage carbonSoFar={totalCarbon} goal={goal}/>
       </div>
       <br></br>
 
-      <Message carbonSoFar={carbonSoFar} goal={goal}/>
+      <Message carbonSoFar={totalCarbon} goal={goal}/>
       <br></br>
       <p>** Very low: {'<'} 6,000 lb/year ➡️ {'<'} 16 lb/day</p>
       <p>** Low: 6,000 - 15,999 lb/year ➡️ 16 - 44 lb/day</p>
