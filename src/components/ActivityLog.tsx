@@ -7,8 +7,13 @@ interface Activity {
   carbon: number
 }
 
-function ActivityLog({ activities, addActivity, deleteActivity }: {
-  activities: Activity[], addActivity: (newActivity: Activity)  => void, deleteActivity: (index: number)=> void}) {
+interface ActivityLogProp {
+  activities: Activity[], 
+  addActivity: (newActivity: Activity)  => void, 
+  deleteActivity: (index: number)=> void
+}
+
+function ActivityLog({ activities, addActivity, deleteActivity }: ActivityLogProp) {
   
   const [newActivity, setNewActivity] = useState<Activity>({
     name: "",
@@ -25,9 +30,7 @@ function ActivityLog({ activities, addActivity, deleteActivity }: {
 
   function addActivityHandler() {
     if (!newActivity.name || !newActivity.category || !newActivity.carbon) return
-
     addActivity(newActivity)
-
     setNewActivity({
       name: "",
       category: "",
@@ -37,9 +40,7 @@ function ActivityLog({ activities, addActivity, deleteActivity }: {
 
   return (
     <div className='activity-log'>
-
       <h2>Activity Log</h2>
-
       <div className='add-activity-container'>
         {/* Activity Name Input */}
         <input 
@@ -49,7 +50,6 @@ function ActivityLog({ activities, addActivity, deleteActivity }: {
           value={newActivity.name}
           onChange={handleInputChange}
         />
-
         {/* Activity Category Dropdown */}
         <select  
           name="category"
@@ -62,7 +62,6 @@ function ActivityLog({ activities, addActivity, deleteActivity }: {
             <option value="Transportation">Transportation</option>
             <option value="Waste">Waste</option>
         </select>
-
         {/* CO2 Input & unit */}
         <div className='carbon-input'>
           <input 
@@ -76,12 +75,10 @@ function ActivityLog({ activities, addActivity, deleteActivity }: {
           <span>lb</span>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
-        
         {/* Add Button */}
         <button className="button" onClick={addActivityHandler}>Add</button>
       </div> 
       <br></br>
-
       <ul>
         {activities.map((activity, index) => (
           <li key={index} className='activity-element'>

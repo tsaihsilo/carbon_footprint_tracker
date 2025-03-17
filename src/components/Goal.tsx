@@ -1,17 +1,23 @@
 import { SetStateAction } from 'react'
 import '../App.css'
 
-interface percentageProp {
+interface GoalProp {
+  totalCarbon: number, 
+  goal: number, 
+  setGoal: (newGoal: number)  => void
+}
+
+interface PercentageProp {
   carbonSoFar: number;
   goal: number
 }
 
-interface messageProp {
+interface MessageProp {
   carbonSoFar: number;
   goal: number
 }
 
-function Goal({ totalCarbon, goal, setGoal }: { totalCarbon: number, goal: number, setGoal: (newGoal: number)  => void}) {
+function Goal({ totalCarbon, goal, setGoal }: GoalProp) {
   
   function handleInputChange(event: { target: { value: SetStateAction<string>; }; }) {
     setGoal(Number(event.target.value))
@@ -21,7 +27,7 @@ function Goal({ totalCarbon, goal, setGoal }: { totalCarbon: number, goal: numbe
     setGoal(0)
   }
 
-  function Percentage({ carbonSoFar, goal }: percentageProp) {
+  function Percentage({ carbonSoFar, goal }: PercentageProp) {
     let percentage = 0
     if (goal === 0) {
       percentage = 0
@@ -35,7 +41,7 @@ function Goal({ totalCarbon, goal, setGoal }: { totalCarbon: number, goal: numbe
     return <span>{percentage}%</span>
   }
 
-  function Message({ carbonSoFar, goal }: messageProp) {
+  function Message({ carbonSoFar, goal }: MessageProp) {
     if (goal === 0) {
       return <p>Set a goal to start tracking your carbon footprint reduction!</p>
     }

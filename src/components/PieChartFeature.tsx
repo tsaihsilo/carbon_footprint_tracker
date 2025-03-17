@@ -9,13 +9,9 @@ interface Activity {
   carbon: number;
 }
 
-interface messageProp {
-  totalCarbon: number
-}
-
 function PieChartFeature({ activities, totalCarbon }: { activities: Activity[], totalCarbon: number }) {
 
-  function Message({ totalCarbon }: messageProp) {
+  function Message({ totalCarbon }: { totalCarbon: number }) {
     if (totalCarbon === 0) {
       return <p>Add activities to visualize the pie chart!</p>
     }
@@ -76,10 +72,10 @@ function PieChartFeature({ activities, totalCarbon }: { activities: Activity[], 
 
   return (
     <div className="pie-chart">
-      <h2>PieChart</h2>
+      <h2>Pie Chart</h2>
       <div className="pie-chart-container">
         <Message totalCarbon={totalCarbon} />
-        <ResponsiveContainer width="100%" height={500}>  
+        <ResponsiveContainer width="100%" height={550}>  
           <PieChart width={500} height={500}>
             <Pie
               data={data}
@@ -87,7 +83,7 @@ function PieChartFeature({ activities, totalCarbon }: { activities: Activity[], 
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              outerRadius={120}
+              outerRadius={180}
 
               dataKey="value"
             >

@@ -5,6 +5,7 @@ import Goal from './components/Goal.tsx';
 import PieChartFeature from './components/PieChartFeature.tsx';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
+import './App.css'
 
 interface Activity {
   name: string; 
@@ -12,107 +13,102 @@ interface Activity {
   carbon: number
 }
 
-interface DateDictionary {
+interface ActivitiesDictionary {
   [date: string]: Activity[]
 }
 
-interface DateGoal {
+interface GoalsDictionary {
   [date: string]: number
 }
 
-function loadFromLocalStorage(key: string, fallback: any) {
-  return JSON.parse(localStorage.getItem(key) || fallback)
+function loadFromLocalStorage(key: string, fallback: object) {
+  return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback))
+}
+
+function saveToLocalStorage(key: string, data: ActivitiesDictionary | GoalsDictionary) {
+  return localStorage.setItem(key, JSON.stringify(data))
+}
+
+function getTotalCarbon(activitiesDictionary: ActivitiesDictionary, dateInput: string) {
+  return (activitiesDictionary[dateInput] ?? []).reduce((acc, curr) => acc + curr.carbon, 0)
+}
+
+function getAllCarbonData(activitiesDictionary: ActivitiesDictionary) {
+  return Object.keys(activitiesDictionary)
+    .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
+    .map((date: string) => ({
+      date: date, 
+      totalCarbon: getTotalCarbon(activitiesDictionary, date)
+  }))
 }
 
 function App() {
   const [date, setDate] = useState<Date>(new Date())
   const todayDate = date.toISOString().split("T")[0]
 
-  const [dateDictionary, setDateDictionary] = useState<DateDictionary>(
-    () => loadFromLocalStorage("dateDictionary", {})
+  const [activitiesDictionary, setActivitiesDictionary] = useState<ActivitiesDictionary>(
+    () => loadFromLocalStorage("activitiesDictionary", {})
   )
 
-  function getActivities(dateDictionary: DateDictionary, dateInput: string) {
-    return dateDictionary[dateInput] || []
-  }
+  const [goalsDictionary, setGoalsDictionary] = useState<GoalsDictionary>(
+    () => loadFromLocalStorage("goalsDictionary", {})
+  )
+
+  useEffect(() => {
+    saveToLocalStorage("activitiesDictionary", activitiesDictionary)
+  }, [activitiesDictionary])
+
+  useEffect(() => {
+    saveToLocalStorage("goalsDictionary", goalsDictionary)
+  }, [goalsDictionary])
 
   function addActivity(newActivity: Activity) {
-    setDateDictionary(prev => {
+    setActivitiesDictionary(prev => {
       const updatedTodayActivity = prev[todayDate] ? [...prev[todayDate], newActivity] : [newActivity]
       return {...prev, [todayDate]: updatedTodayActivity}
     })
   }
 
   function deleteActivity(index: number) {
-    setDateDictionary(prev => {
+    setActivitiesDictionary(prev => {
       const updatedTodayActivity = prev[todayDate].filter((_, i) => i != index)
       return {...prev, [todayDate]: updatedTodayActivity}
     })
   }
 
-  function getTotalCarbon(dateDictionary: DateDictionary, dateInput: string) {
-    return (dateDictionary[dateInput] ?? []).reduce((acc, curr) => acc + curr.carbon, 0)
-  }
-
-  function getAllCarbonData(dateDictionary: DateDictionary) {
-    return Object.keys(dateDictionary)
-      .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
-      .map((date: string) => ({
-        date: date, 
-        totalCarbon: getTotalCarbon(dateDictionary, date)
-    }))
-  }
-
-  function initialGoalState() {
-    const saveGoalDictionary = window.localStorage.getItem("goalDictionary")
-    return saveGoalDictionary ? JSON.parse(saveGoalDictionary) : {}
-  }
-
-  const [goalsDictionary, setGoalsDictionary] = useState<DateGoal>(() => initialGoalState())
-
-  const goal = goalsDictionary[todayDate] || 0
-
   function setGoal(newGoal: number) {
     setGoalsDictionary(prev => {
-      return {...prev, [todayDate]: newGoal}
+      const updatedGoalsDictionary = {...prev, [todayDate]: newGoal}
+      saveToLocalStorage("goalsDictionary", updatedGoalsDictionary)
+      return updatedGoalsDictionary
     })
   }
-
-  useEffect(() => {
-    window.localStorage.setItem("dateDictionary", JSON.stringify(dateDictionary))
-  }, [dateDictionary])
-  
-  useEffect(() => {
-    window.localStorage.setItem("goalDictionary", JSON.stringify(goalsDictionary))
-  }, [goalsDictionary])
 
   return (
     <div>
       <div className='title-container'>
         <h1>Carbon Footprint Tracker</h1>
       </div>
-
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <p style={{ margin: 0 }}>Select a date:</p>
-        <DatePicker 
-          selected={date} 
-          onChange={(date: Date | null) => date && setDate(date)} />
+        <p>Select a date:</p>
+        <DatePicker selected={date} onChange={date => date && setDate(date)} />
       </div>
-
       <div className='container'>
-        <Dashboard
-          allCarbonData={getAllCarbonData(dateDictionary)}/>
+        <Dashboard allCarbonData={getAllCarbonData(activitiesDictionary)}/>
         <ActivityLog 
-          activities={getActivities(dateDictionary, todayDate)} 
+          activities={activitiesDictionary[todayDate] || []} 
           addActivity={addActivity}
-          deleteActivity={deleteActivity}/>
+          deleteActivity={deleteActivity}
+        />
         <PieChartFeature 
-          activities={getActivities(dateDictionary, todayDate)}
-          totalCarbon={getTotalCarbon(dateDictionary, todayDate)}/>
+          activities={activitiesDictionary[todayDate] || []}
+          totalCarbon={getTotalCarbon(activitiesDictionary, todayDate)}
+        />
         <Goal 
-          totalCarbon={getTotalCarbon(dateDictionary, todayDate)}
-          goal={goal}
-          setGoal={setGoal}/>
+          totalCarbon={getTotalCarbon(activitiesDictionary, todayDate)}
+          goal={goalsDictionary[todayDate] || 0}
+          setGoal={setGoal}
+        />
       </div>
     </div>
   )
