@@ -20,16 +20,17 @@ interface DateGoal {
   [date: string]: number
 }
 
+function loadFromLocalStorage(key: string, fallback: any) {
+  return JSON.parse(localStorage.getItem(key) || fallback)
+}
+
 function App() {
   const [date, setDate] = useState<Date>(new Date())
   const todayDate = date.toISOString().split("T")[0]
 
-  function initialDateDictionaryState () {
-    const savedDateDictionary = window.localStorage.getItem("dateDictionary")
-    return savedDateDictionary ? JSON.parse(savedDateDictionary) : {}
-  }
-
-  const [dateDictionary, setDateDictionary] = useState<DateDictionary>(() => initialDateDictionaryState())
+  const [dateDictionary, setDateDictionary] = useState<DateDictionary>(
+    () => loadFromLocalStorage("dateDictionary", {})
+  )
 
   function getActivities(dateDictionary: DateDictionary, dateInput: string) {
     return dateDictionary[dateInput] || []
