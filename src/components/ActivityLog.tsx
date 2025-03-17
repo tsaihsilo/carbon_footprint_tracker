@@ -7,9 +7,8 @@ interface Activity {
   carbon: number
 }
 
-function ActivityLog({ activities, setActivities }: {
-  activities: Activity[],
-  setActivities: React.Dispatch<React.SetStateAction<Activity[]>>}) {
+function ActivityLog({ activities, addActivity, deleteActivity }: {
+  activities: Activity[], addActivity: (newActivity: Activity)  => void, deleteActivity: (index: number)=> void}) {
   
   const [newActivity, setNewActivity] = useState<Activity>({
     name: "",
@@ -24,20 +23,16 @@ function ActivityLog({ activities, setActivities }: {
     })
   }
 
-  function addActivity() {
-    if (!newActivity.name || !newActivity.category || !newActivity.carbon) return;
+  function addActivityHandler() {
+    if (!newActivity.name || !newActivity.category || !newActivity.carbon) return
 
-    setActivities(activities => [...activities, newActivity]);
-    
+    addActivity(newActivity)
+
     setNewActivity({
-      name: "", 
-      category: "", 
+      name: "",
+      category: "",
       carbon: 0
     })
-  }
-
-  function deleteActivity(index: number) {
-    setActivities(activities => activities.filter((_, i) => i != index))
   }
 
   return (
@@ -83,7 +78,7 @@ function ActivityLog({ activities, setActivities }: {
         </div>
         
         {/* Add Button */}
-        <button className="button" onClick={addActivity}>Add</button>
+        <button className="button" onClick={addActivityHandler}>Add</button>
       </div> 
       <br></br>
 
