@@ -25,5 +25,5 @@ npm install
 ```
 3. Start the Development Server
 ```
-Start the Development Server
+npm run dev
 ```
