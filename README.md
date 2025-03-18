@@ -4,9 +4,13 @@ A React + TypeScript + Vite web application that allows users to log daily activ
 
 ## Features
 Activity Logging - Log daily activities, categorize them, and track associated carbon values.
+
 Summary Views - Visualize carbon footprint trends over time with charts and graphs.
+
 Goal Setting - Set personal carbon reduction targets and monitor progress.
+
 Local Storage - Data is stored in localStorage for privacy and offline access.
+
 Data Visualization - Interactive graphs help identify category distribution and areas for improvement.<br>
 
 ## Setup Instructions
