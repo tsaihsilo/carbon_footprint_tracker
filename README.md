@@ -11,7 +11,7 @@ Goal Setting - Set personal carbon reduction targets and monitor progress.
 
 Local Storage - Data is stored in localStorage for privacy and offline access.
 
-Data Visualization - Interactive graphs help identify category distribution and areas for improvement.<br>
+Data Visualization - Interactive graphs help identify category distribution and areas for improvement.<br><br>
 
 ## Setup Instructions
 1. Clone the Repository
