@@ -3,7 +3,8 @@
 A React + TypeScript + Vite web application that allows users to log daily activities, track their carbon footprint, and set goals to reduce their environmental impact.
 
 ## Features
-###Activity Logging
+
+### Activity Logging
 Log daily activities, categorize them, and track associated carbon values.
 
 2. Summary Views - Visualize carbon footprint trends over time with charts and graphs.
