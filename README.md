@@ -1,6 +1,6 @@
 # Carbon Footprint Tracker
 
-A React + TypeScript + Vite web application that allows users to log daily activities, track their carbon footprint, and set goals to reduce their environmental impact.
+A React + TypeScript + Vite web application that allows users to log daily activities, track their carbon footprint, and set goals to reduce their environmental impact.<br>
 
 ## Features
 Activity Logging - Log daily activities, categorize them, and track associated carbon values.
@@ -11,7 +11,7 @@ Goal Setting - Set personal carbon reduction targets and monitor progress.
 
 Local Storage - Data is stored in localStorage for privacy and offline access.
 
-Data Visualization - Interactive graphs help identify category distribution and areas for improvement.<br>
+Data Visualization - Interactive graphs help identify category distribution and areas for improvement.<br><br>
 
 ## Setup Instructions
 1. Clone the Repository
